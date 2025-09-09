@@ -1,0 +1,811 @@
+
+
+* {
+   margin: 0;
+}
+
+body {
+   font-family: "Jost", sans-serif;
+   margin: 0;
+   padding: 0;
+   color: #333;
+   line-height: 1.6;
+   overflow-x: hidden;
+}
+
+/* Герой-секция */
+.hero-section {
+   background-image: url("../../assets/images/backgroundcar.png");
+   background-size: cover;
+   background-position: center;
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
+   color: rgb(255, 187, 0);
+}
+
+.header {
+   display: flex;
+   justify-content: space-between;
+}
+
+.onas-text {
+   background-color: #696969;
+   height: max-content;
+   padding: 16px;
+   border-radius: 20px;
+   font-size: 25px;
+   color: rgb(255, 187, 0);
+   display: flex;
+   flex-direction: column;
+   gap: 6px;
+   margin: 0;
+}
+
+.end-line {
+   display: flex;
+   align-items: center;
+   padding: 20px 5%;
+   background: rgba(0, 0, 0, 0.2);
+   position: fixed;
+   width: 90%;
+   top: 0;
+   z-index: 1000;
+   transition: all 0.3s ease;
+}
+
+.header.scrolled {
+   background: rgba(0, 0, 0, 0.8);
+   padding: 15px 5%;
+}
+
+.header-icon {
+   width: 50px;
+   height: auto;
+}
+
+.nav-links {
+   display: flex;
+   list-style: none;
+   gap: 30px;
+   margin: 0;
+   padding: 0;
+}
+
+.nav-links a {
+   color: #fff;
+   text-decoration: none;
+   font-weight: 500;
+   transition: color 0.3s;
+   padding: 5px 10px;
+   position: relative;
+}
+
+.nav-links a::after {
+   content: "";
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   width: 0;
+   height: 2px;
+   background: rgb(255, 187, 0);
+   transition: width 0.3s;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+   width: 100%;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+   color: rgb(255, 187, 0);
+}
+
+.hero-content {
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   max-width: 800px;
+   margin: 0 auto;
+   text-align: center;
+   padding: 0 5%;
+   padding-top: 100px;
+}
+
+.hero-content h1 {
+   font-size: 5rem;
+   margin-bottom: 20px;
+   animation: fadeInDown 1s ease;
+}
+.hero-content h2 {
+   margin-bottom: 20px;
+   animation: fadeInDown 1s ease;
+   color: #646464;
+}
+
+.hero-subtitle {
+   font-size: 1.5rem;
+   margin-bottom: 40px;
+   color: #ddd;
+   animation: fadeInUp 1s ease;
+}
+
+.cta-button {
+   background: rgb(255, 187, 0);
+   color: white;
+   padding: 15px 30px;
+   border-radius: 50px;
+   text-decoration: none;
+   font-weight: 600;
+   display: inline-block;
+   width: fit-content;
+   margin: 0 auto;
+   transition: all 0.3s;
+   animation: fadeIn 1.5s ease;
+}
+
+.cta-button:hover {
+   background: #464646;
+   transform: translateY(-3px);
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Секции */
+.section-header {
+   text-align: center;
+   margin-bottom: 50px;
+}
+
+.section-header h2 {
+   font-size: 2.5rem;
+   color: rgb(255, 187, 0);
+   margin-bottom: 15px;
+   position: relative;
+   display: inline-block;
+}
+
+.section-header h2::after {
+   content: "";
+   position: absolute;
+   bottom: -15px;
+   left: 50%;
+   transform: translateX(-50%);
+   width: 80px;
+   height: 3px;
+   background: rgb(255, 187, 0);
+}
+
+.section-header p {
+   font-size: 1.2rem;
+   color: #a5a5a5;
+   max-width: 700px;
+   margin: 0 auto;
+}
+
+/* Каталог туров */
+.catalog-section {
+   padding: 8% 5%;
+   background: linear-gradient(
+         rgba(0, 0, 0, 0.7),
+         rgba(0, 0, 0, 0.9)
+      ),
+      url("../../assets/images/Group 1.png");
+   background-size: cover;
+   background-position: center;
+}
+
+.tours-slider {
+   margin: 0 auto;
+   max-width: 1200px;
+}
+
+.tour-card {
+   background: white;
+   border-radius: 10px;
+   overflow: hidden;
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+   margin: 15px;
+   transition: all 0.3s;
+}
+
+.tour-card:hover {
+   transform: translateY(-10px);
+   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.tour-card img {
+   width: 100%;
+   height: 250px;
+   object-fit: cover;
+   transition: transform 0.5s;
+}
+
+.tour-card:hover img {
+   transform: scale(1.05);
+}
+
+.tour-info {
+   padding: 20px;
+}
+
+.tour-info h3 {
+   margin-top: 0;
+   color: #2c3e50;
+   font-size: 1.4rem;
+}
+
+.tour-duration {
+   color: #7f8c8d;
+   font-size: 0.9rem;
+   margin: 10px 0;
+   display: flex;
+   align-items: center;
+   gap: 5px;
+}
+
+.tour-duration i {
+   color: rgb(255, 187, 0);
+}
+
+.tour-description {
+   color: #555;
+   margin-bottom: 20px;
+   font-size: 1rem;
+}
+
+.tour-button {
+   display: inline-block;
+   padding: 10px 20px;
+   background: #3498db;
+   color: white;
+   text-decoration: none;
+   border-radius: 5px;
+   font-weight: 500;
+   transition: all 0.3s;
+}
+
+.tour-button:hover {
+   background: #2980b9;
+   transform: translateY(-2px);
+   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* О нас */
+.about-section {
+   padding: 80px 5%;
+   background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4)),
+      url("../../assets/images/Group 1.png");
+   background-size: cover;
+   color: white;
+   position: relative;
+   height: 95vh;
+}
+
+.about-section::before {
+   content: "";
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: rgba(0, 0, 0, 0.5);
+}
+
+.about-section .section-header h2 {
+   color: white;
+   position: relative;
+   z-index: 1;
+}
+
+.about-section .section-header p {
+   color: #ddd;
+   position: relative;
+   z-index: 1;
+}
+
+.about-content {
+   display: flex;
+   max-width: 1200px;
+   margin: 0 auto;
+   gap: 40px;
+   align-items: center;
+   position: relative;
+   z-index: 1;
+}
+
+.about-text {
+   flex: 1;
+
+   padding: 30px;
+   border-radius: 10px;
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+   color: #ffffff;
+}
+
+.about-text p {
+   margin-bottom: 20px;
+   font-size: 1.1rem;
+   line-height: 1.7;
+}
+
+.signature {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   margin-top: 30px;
+   font-style: italic;
+   font-weight: 500;
+}
+
+.signature img {
+   width: 50px;
+   height: auto;
+}
+
+.about-gallery {
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+}
+
+.gallery-top {
+   display: flex;
+   gap: 20px;
+}
+
+.gallery-top img,
+.gallery-bottom {
+   border-radius: 10px;
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+   transition: transform 0.5s;
+}
+
+.gallery-top img:hover,
+.gallery-bottom:hover {
+   transform: scale(1.03);
+}
+
+.gallery-top img {
+   width: 50%;
+   height: 200px;
+   object-fit: cover;
+}
+
+.gallery-bottom {
+   width: 100%;
+   height: 250px;
+   object-fit: cover;
+}
+
+/* Галерея */
+.gallery-section {
+   padding: 80px 5%;
+   background-color: #000000;
+}
+
+.gallery-filters {
+   display: flex;
+   justify-content: center;
+   gap: 15px;
+   margin-bottom: 30px;
+   flex-wrap: wrap;
+}
+
+.filter-btn {
+   padding: 10px 20px;
+   background: #7c7b7b;
+   border: none;
+   border-radius: 30px;
+   cursor: pointer;
+   font-family: "Jost", sans-serif;
+   font-size: 16px;
+   transition: all 0.3s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+   background: rgb(255, 187, 0);
+   color: rgb(0, 0, 0);
+}
+
+.location-slider {
+   display: none;
+   margin-bottom: 40px;
+}
+
+.location-slider.active {
+   display: block;
+}
+
+.location-slide {
+   padding: 0 10px;
+   position: relative;
+}
+
+.location-slide img {
+   width: 100%;
+   height: 400px;
+   object-fit: cover;
+   border-radius: 10px;
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.slide-caption {
+   position: absolute;
+   bottom: 20px;
+   left: 20px;
+   right: 20px;
+   background: rgba(0, 0, 0, 0.7);
+   color: white;
+   padding: 10px;
+   border-radius: 5px;
+   text-align: center;
+}
+
+/* Контакты */
+.contacts-section {
+   padding: 80px 5%;
+   background: linear-gradient(
+         rgba(0, 0, 0, 0.9),
+         rgba(0, 0, 0, 0.7)
+      ),
+      url("../../assets/images/background1.jpg");
+   background-size: cover;
+   background-position: center;
+}
+
+.contacts-container {
+   max-width: 1200px;
+   margin: 0 auto;
+   display: flex;
+   gap: 40px;
+}
+
+.contacts-info {
+   flex: 1;
+   background: rgb(56, 58, 45);
+   padding: 30px;
+   border-radius: 10px;
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.contacts-info h3 {
+   color: rgb(255, 187, 0);
+   margin-bottom: 20px;
+   font-size: 1.8rem;
+}
+
+.contact-item {
+   display: flex;
+   align-items: flex-start;
+   gap: 15px;
+   margin-bottom: 20px;
+}
+
+.contact-icon {
+   width: 40px;
+   height: 40px;
+   background: rgb(255, 187, 0);
+   border-radius: 50%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   color: white;
+   font-size: 1.2rem;
+}
+
+.contact-text h4 {
+   margin: 0 0 5px 0;
+   color: #2c3e50;
+}
+
+.contact-text p {
+   margin: 0;
+   color: #555;
+}
+
+.contacts-map {
+   flex: 1;
+   border-radius: 10px;
+   overflow: hidden;
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+   height: 400px;
+}
+
+/* Слайдер стили */
+.slick-prev,
+.slick-next {
+   width: 40px;
+   height: 40px;
+   z-index: 1;
+}
+
+.slick-prev:before,
+.slick-next:before {
+   font-size: 40px;
+   color: rgb(255, 187, 0);
+}
+
+
+.slick-dots {
+   bottom: 20px;
+}
+
+.slick-dots li button:before {
+   font-size: 12px;
+   color: white;
+}
+
+.slick-dots li.slick-active button:before {
+   color: rgb(255, 187, 0);
+}
+
+/* Футер */
+.footer {
+   background: #2c3e50;
+   color: white;
+   padding: 50px 5% 20px;
+}
+
+.footer-content {
+   display: flex;
+   justify-content: space-between;
+   max-width: 1200px;
+   margin: 0 auto;
+   flex-wrap: wrap;
+   gap: 30px;
+}
+
+.footer-logo {
+   flex: 1;
+   min-width: 250px;
+}
+
+.footer-logo img {
+   width: 50px;
+   height: auto;
+   margin-bottom: 15px;
+}
+
+.footer-logo p {
+   color: #bdc3c7;
+   line-height: 1.6;
+}
+
+.footer-links {
+   flex: 1;
+   min-width: 200px;
+}
+
+.footer-links h4,
+.footer-contacts h4 {
+   font-size: 1.2rem;
+   margin-bottom: 20px;
+   color: #ecf0f1;
+}
+
+.footer-links ul {
+   list-style: none;
+   padding: 0;
+   margin: 0;
+}
+
+.footer-links li {
+   margin-bottom: 10px;
+}
+
+.footer-links a {
+   color: #bdc3c7;
+   text-decoration: none;
+   transition: color 0.3s;
+}
+
+.footer-links a:hover {
+   color: rgb(255, 187, 0);
+}
+
+.footer-contacts {
+   flex: 1;
+   min-width: 250px;
+}
+
+.footer-contacts p {
+   margin: 10px 0;
+   color: #bdc3c7;
+   display: flex;
+   align-items: center;
+   gap: 10px;
+}
+
+.footer-contacts i {
+   color: rgb(255, 187, 0);
+}
+
+.footer-bottom {
+   text-align: center;
+   margin-top: 50px;
+   padding-top: 20px;
+   border-top: 1px solid #34495e;
+   color: #bdc3c7;
+   font-size: 0.9rem;
+}
+
+/* Социальные иконки */
+.social-panel {
+   position: fixed;
+   left: 20px;
+   bottom: 20px;
+   z-index: 1000;
+}
+
+.social-toggle {
+   display: none;
+}
+
+.social-button {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 50px;
+   height: 50px;
+   background: #4d4d4d;
+   color: white;
+   border-radius: 50%;
+   cursor: pointer;
+   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+   transition: all 0.3s ease;
+}
+
+.social-button i {
+   font-size: 20px;
+}
+
+.social-button:hover {
+   background: #696969;
+}
+
+.social-icons {
+   position: absolute;
+   bottom: 60px;
+   left: 0;
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
+   opacity: 0;
+   visibility: hidden;
+   transform: translateY(20px);
+   transition: all 0.3s ease;
+}
+
+.social-icon {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 50px;
+   height: 50px;
+   border-radius: 50%;
+   background: white;
+   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+   transition: all 0.2s ease;
+}
+
+.social-icon:hover {
+   transform: scale(1.1);
+}
+
+.social-icon img {
+   width: 60%;
+   height: 60%;
+   object-fit: contain;
+}
+
+.social-toggle:checked ~ .social-icons {
+   opacity: 1;
+   visibility: visible;
+   transform: translateY(0);
+}
+
+.social-toggle:checked + .social-button {
+   background: #3498db;
+   transform: rotate(45deg);
+}
+
+/* Кнопка наверх */
+.back-to-top {
+   position: fixed;
+   bottom: 30px;
+   right: 30px;
+   width: 50px;
+   height: 50px;
+   background: rgb(255, 187, 0);
+   color: white;
+   border-radius: 50%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: 1.2rem;
+   cursor: pointer;
+   opacity: 0;
+   visibility: hidden;
+   transition: all 0.3s;
+   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+   z-index: 999;
+}
+
+.back-to-top.active {
+   opacity: 1;
+   visibility: visible;
+}
+
+.back-to-top:hover {
+   background: #3e8e41;
+   transform: translateY(-3px);
+}
+
+
+
+.header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(0, 0, 0, 0.2);
+            position: fixed;
+            width: 90%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 5%;
+        }
+
+        .header-icon {
+            width: 75px;
+            height: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: rgb(255, 187, 0);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #bda126;
+        }
+
+
