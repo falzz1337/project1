@@ -17,6 +17,7 @@
             --dark-gray: #2a2a2a;
             --light-gray: #7f8c8d;
             --text-light: #f5f5f5;
+            --map-height: 500px; /* Переменная для управления высотой карты */
         }
         
         * {
@@ -32,6 +33,7 @@
             overflow-x: hidden;
             background-color: var(--primary-black);
             scroll-behavior: smooth;
+            transition: background-color 1s ease;
         }
         
         /* Анимации */
@@ -49,6 +51,12 @@
         @keyframes slideInFromTop {
             from { transform: translateY(-100%); }
             to { transform: translateY(0); }
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
         /* Хедер */
@@ -125,7 +133,7 @@
         
         /* Герой секция */
         .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1567899378494-47b22b6b6a3c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background: linear-gradient(125deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1567899378494-47b22b6b6a3c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
             min-height: 100vh;
@@ -134,6 +142,7 @@
             color: var(--text-light);
             position: relative;
             overflow: hidden;
+            transition: all 1s ease;
         }
         
         .hero-section::before {
@@ -211,6 +220,20 @@
             opacity: 0;
             transform: translateY(50px);
             transition: opacity 0.8s ease, transform 0.8s ease;
+            position: relative;
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, var(--primary-black) 100%);
+            opacity: 0;
+            transition: opacity 1s ease;
+            pointer-events: none;
         }
         
         .section.visible {
@@ -255,7 +278,7 @@
         
         /* О нас */
         .about-section {
-            background: var(--dark-gray);
+            background: var(--primary-black);
             color: var(--text-light);
             position: relative;
         }
@@ -333,6 +356,7 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             height: 200px;
+            position: relative;
         }
         
         .gallery-item:hover {
@@ -352,9 +376,9 @@
         }
         
         /* Отзывы */
-            .reviews-section {
+        .reviews-section {
             padding: 80px 5%;
-            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), url("../../test/assets/images/Slice\ 3.png");
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url("../../test/assets/images/Slice\ 3.png");
             background-size: cover;
             background-position: center;
             color: white;
@@ -544,7 +568,42 @@
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            height: 735px;
+            height: var(--map-height);
+            position: relative;
+        }
+        
+        /* Элементы управления картой */
+        .map-controls {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        .map-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-orange);
+            border: none;
+            border-radius: 50%;
+            color: var(--primary-black);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .map-btn:hover {
+            background: #ff8c00;
+            transform: scale(1.1);
         }
         
         /* Футер */
@@ -614,6 +673,17 @@
             background: var(--primary-orange);
             color: var(--primary-black);
             transform: translateY(-5px);
+        }
+        
+        /* Исправление для иконки Avito */
+        .social-icon.avito {
+            padding: 5px;
+        }
+        
+        .social-icon.avito img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
         }
         
         .footer-bottom {
@@ -720,6 +790,24 @@
             box-shadow: 0 0 0 2px rgba(255, 165, 0, 0.2);
         }
         
+        /* Исправление для выпадающего списка */
+        select.form-control {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFA500' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 16px;
+        }
+        
+        /* Стилизация опций в выпадающем списке */
+        select.form-control option {
+            background: var(--dark-gray);
+            color: var(--text-light);
+            padding: 10px;
+        }
+        
         .form-submit {
             width: 100%;
             padding: 14px;
@@ -752,7 +840,7 @@
             }
             
             .contacts-map {
-                height: 300px;
+                height: 700px;
             }
             
             .hero-content h1 {
@@ -814,6 +902,32 @@
             .stat-item {
                 min-width: 150px;
             }
+            
+            /* Исправление для галереи на мобильных устройствах */
+            .about-gallery {
+                grid-template-columns: 1fr;
+                margin-top: 30px;
+            }
+            
+            .gallery-item {
+                height: 250px;
+            }
+            
+            .gallery-item:nth-child(3) {
+                grid-column: 1;
+                height: 250px;
+            }
+            
+            .map-controls {
+                bottom: 10px;
+                right: 10px;
+            }
+            
+            .map-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
         }
         
         @media (max-width: 576px) {
@@ -838,12 +952,21 @@
                 grid-template-columns: 1fr;
             }
             
+            .gallery-item {
+                height: 200px;
+            }
+            
             .gallery-item:nth-child(3) {
-                grid-column: span 1;
+                grid-column: 1;
+                height: 200px;
             }
             
             .modal {
                 padding: 25px;
+            }
+            
+            .contacts-map {
+                height: 750px;
             }
         }
         
@@ -906,6 +1029,35 @@
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(255, 165, 0, 0.4);
         }
+        
+        /* Плавные переходы между секциями */
+        .section-transition {
+            height: 100px;
+            background: linear-gradient(to bottom, 
+                var(--primary-black), 
+                var(--primary-black));
+            position: relative;
+            z-index: 5;
+        }
+        
+        .reviews-transition {
+            height: 100px;
+            background: linear-gradient(to bottom, 
+                var(--primary-black), 
+                #1a1a1a 30%,
+                #0a0a0a 70%);
+            position: relative;
+            z-index: 5;
+        }
+        
+        .contacts-transition {
+            height: 100px;
+            background: linear-gradient(to bottom, 
+                #0a0a0a, 
+                var(--primary-black));
+            position: relative;
+            z-index: 5;
+        }
     </style>
 </head>
 <body>
@@ -933,6 +1085,9 @@
             <a href="#" class="cta-button" id="openModalBtn">Подобрать автомобиль</a>
         </div>
     </section>
+
+    <!-- Плавный переход -->
+    <div class="section-transition"></div>
 
     <!-- О нас -->
     <section id="about" class="section about-section">
@@ -966,23 +1121,26 @@
             </div>
             <div class="about-gallery">
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1549399542-7e82138d43aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Осмотр автомобиля">
+                    <img src="../../test/assets/images/XXXL (2) 1.png" alt="Осмотр автомобиля">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1566473217016-6a4df49e5745?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Диагностика">
+                    <img src="../../test/assets/images/XXXL.webp" alt="Диагностика">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1563720223880-4d93eef1f1c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Команда профессионалов">
+                    <img src="../../test/assets/images/XXXL (1) 1.png" alt="Команда профессионалов">
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Плавный переход -->
+    <div class="reviews-transition"></div>
+
     <!-- Отзывы -->
     <section class="reviews-section" id="reviews">
         <div class="section-header">
             <h2>Отзывы наших клиентов</h2>
-            <p>Узнайте, что говорют о нас те, кто уже воспользовался нашими услугами</p>
+            <p>Узнайте, что говорят о нас те, кто уже воспользовался нашими услугами</p>
         </div>
         
         <div class="reviews-container">
@@ -1002,8 +1160,8 @@
             <!-- Отзыв 2 -->
             <div class="review-card">
                 <div class="review-header">
-                    <div class="reviewer-name">Игорь Крупышев</div>
-                    <div class="review-date">3 ноября 2023</div>
+                    <div class="reviewer-name">Игорь</div>
+                    <div class="review-date">3 ноября</div>
                 </div>
                 <div class="review-rating">★★★★★</div>
                 <div class="review-car">Hyundai Santa Fe 2.2 AT, 2008, 256 000 км</div>
@@ -1065,7 +1223,7 @@
                     <div class="review-date">5 сентября</div>
                 </div>
                 <div class="review-rating">★★★★★</div>
-                <div class="review-car">Nissan Dayz Roox 0.7 CVT, 2016</div>
+                <div class="review-car">Nissan Dayz Roox 0.7 CVT, 2016, 60 000 км</div>
                 <div class="review-comment">
                     Был приятно удивлён компетентностью и клиентоориентированностью ребят. Если одной фразой, то «работают на репутацию».
                 </div>
@@ -1090,6 +1248,9 @@
         </div>
     </section>
 
+    <!-- Плавный переход -->
+    <div class="contacts-transition"></div>
+
     <!-- Контакты -->
     <section id="contacts" class="section contacts-section">
         <div class="section-header">
@@ -1107,7 +1268,7 @@
                     </div>
                     <div class="contact-text">
                         <h4>Адрес</h4>
-                        <p>г. Москва, ул. Автозаводская, 25</p>
+                        <p>Петрозаводск, ул. Кирова, 30</p>
                     </div>
                 </div>
                 
@@ -1117,7 +1278,7 @@
                     </div>
                     <div class="contact-text">
                         <h4>Телефон</h4>
-                        <p>+7 (495) 123-45-67</p>
+                        <p>+7 (911) 400-63-09, 63-63-09</p>
                     </div>
                 </div>
                 
@@ -1137,7 +1298,7 @@
                     </div>
                     <div class="contact-text">
                         <h4>Часы работы</h4>
-                        <p>Пн-Пт: 9:00 - 20:00<br>Сб-Вс: 10:00 - 18:00</p>
+                        <p>Пн-Пт: 9:00 - 20:00</p>
                     </div>
                 </div>
                 
@@ -1153,7 +1314,21 @@
             </div>
             
             <div class="contacts-map">
-                <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a&amp;source=constructor" width="100%" height="100%" frameborder="0"></iframe>
+                <!-- Карта с меткой для Петрозаводска, ул. Кирова, 30 -->
+                <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a&amp;source=constructor&ll=34.366444,61.794739&pt=34.366444,61.794739,pm2orgl" width="100%" height="100%" frameborder="0"></iframe>
+                
+                <!-- Элементы управления размером карты -->
+                <div class="map-controls">
+                    <button class="map-btn" id="increaseMap">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="map-btn" id="decreaseMap">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="map-btn" id="resetMap">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
@@ -1173,7 +1348,9 @@
             </div>
             
             <div class="social-icons">
-                <a href="#" class="social-icon"><i class="fab fa-aviato"></i></a>
+                <a href="#" class="social-icon avito">
+                    <img src="../../test/assets/svg/avito-seeklogo 1.svg" alt="Avito">
+                </a>
                 <a href="#" class="social-icon"><i class="fab fa-telegram"></i></a>
                 <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
                 <a href="#" class="social-icon"><i class="fab fa-vk"></i></a>
@@ -1288,6 +1465,18 @@
                 e.preventDefault();
                 var target = this.hash;
                 var $target = $(target);
+                
+                // Плавное изменение фона при переходе между секциями
+                if (target === '#home') {
+                    $('body').css('background-color', '#1a1a1a');
+                } else if (target === '#about') {
+                    $('body').css('background-color', '#2a2a2a');
+                } else if (target === '#reviews') {
+                    $('body').css('background-color', '#0a0a0a');
+                } else if (target === '#contacts') {
+                    $('body').css('background-color', '#1a1a1a');
+                }
+                
                 $('html, body').animate({
                     'scrollTop': $target.offset().top - 80
                 }, 800, 'swing', function() {
@@ -1310,6 +1499,17 @@
                     if(currentPosition >= top && currentPosition <= bottom){
                         navLinks.removeClass('active');
                         $('.nav-links a[href="#' + id + '"]').addClass('active');
+                        
+                        // Плавное изменение фона при скролле
+                        if (id === 'home') {
+                            $('body').css('background-color', '#1a1a1a');
+                        } else if (id === 'about') {
+                            $('body').css('background-color', '#2a2a2a');
+                        } else if (id === 'reviews') {
+                            $('body').css('background-color', '#0a0a0a');
+                        } else if (id === 'contacts') {
+                            $('body').css('background-color', '#1a1a1a');
+                        }
                     }
                 });
                 
@@ -1339,6 +1539,35 @@
                 $('.hero-content h2').css('animation', 'fadeIn 1.2s ease forwards');
                 $('.cta-button').css('animation', 'fadeIn 1.5s ease forwards');
             }, 300);
+            
+            // Управление размером карты
+            const increaseMapBtn = document.getElementById('increaseMap');
+            const decreaseMapBtn = document.getElementById('decreaseMap');
+            const resetMapBtn = document.getElementById('resetMap');
+            const mapContainer = document.querySelector('.contacts-map');
+            
+            // Начальная высота карты
+            let mapHeight = 500;
+            
+            increaseMapBtn.addEventListener('click', function() {
+                mapHeight += 100;
+                mapContainer.style.height = mapHeight + 'px';
+                document.documentElement.style.setProperty('--map-height', mapHeight + 'px');
+            });
+            
+            decreaseMapBtn.addEventListener('click', function() {
+                if (mapHeight > 200) {
+                    mapHeight -= 100;
+                    mapContainer.style.height = mapHeight + 'px';
+                    document.documentElement.style.setProperty('--map-height', mapHeight + 'px');
+                }
+            });
+            
+            resetMapBtn.addEventListener('click', function() {
+                mapHeight = 500;
+                mapContainer.style.height = mapHeight + 'px';
+                document.documentElement.style.setProperty('--map-height', mapHeight + 'px');
+            });
         });
     </script>
     <script>
