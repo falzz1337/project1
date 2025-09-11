@@ -422,6 +422,7 @@
             font-size: 1.4rem;
             font-weight: 600;
             color: #FFA500;
+            margin-right: 10px;
         }
         
         .review-date {
@@ -624,6 +625,8 @@
         
         .footer-logo {
             margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
         }
         
         .footer-logo img {
@@ -827,6 +830,17 @@
             background: #ff8c00;
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(255, 165, 0, 0.3);
+        }
+        
+        /* Стили для скрытого поля "Другое" */
+        #otherServiceGroup {
+            display: none;
+            transition: all 0.3s ease;
+        }
+        
+        #otherServiceGroup.visible {
+            display: block;
+            animation: fadeIn 0.5s ease;
         }
         
         /* Адаптивность */
@@ -1166,7 +1180,7 @@
                 <div class="review-rating">★★★★★</div>
                 <div class="review-car">Hyundai Santa Fe 2.2 AT, 2008, 256 000 км</div>
                 <div class="review-comment">
-                    Добрый день всем! Обратившись к ребятам из ATLANT-W-MOTORS по поводу покупки автомобиля, был приятно удивлен подходом персонала к клиенту, что в наше время не часто встретишь! Показали автомобиль, провели тест-драйв, ответили на все вопросы. В итоге приобрел Santa Fe. Машиной доволен, замечаний нет.
+                    Добрый день всем! Обратившись к ребятам из ATLANT-W-MOTORS по поводу покупки автомобиля, был приятно удивлен подходом персонала к клиенту, что в наше время не часто встретишь! Показали автомобиль, провели тест- драйв, ответили на все вопросы. В итоге приобрел Santa Fe. Машиной доволен, замечаний нет.
                 </div>
                 <div class="review-response">
                     <div class="response-header">Ответ компании:</div>
@@ -1351,9 +1365,15 @@
                 <a href="#" class="social-icon avito">
                     <img src="../../test/assets/svg/avito-seeklogo 1.svg" alt="Avito">
                 </a>
-                <a href="#" class="social-icon"><i class="fab fa-telegram"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-vk"></i></a>
+                <a href="#" class="social-icon avito">
+                    <img src="../../test/assets/svg/telegram.svg" alt="Telegram">
+                </a>
+                <a href="#" class="social-icon avito">
+                    <img src="../../test/assets/svg/Vector.svg" alt="Vk">
+                </a>
+                <a href="#" class="social-icon avito">
+                    <img src="../../test/assets/svg/whatsap.svg" alt="WhatsApp">
+                </a>
             </div>
             
             <div class="footer-bottom">
@@ -1401,6 +1421,10 @@
                         <option value="other">Другое</option>
                     </select>
                 </div>
+                <div class="form-group" id="otherServiceGroup">
+                    <label for="otherService">Уточните, что вас интересует</label>
+                    <input type="text" id="otherService" class="form-control" placeholder="Опишите, какая услуга вам нужна">
+                </div>
                 <button type="submit" class="form-submit">Отправить заявку</button>
             </form>
         </div>
@@ -1438,12 +1462,24 @@
                 }
             });
             
+            // Поле "Другое" - показываем/скрываем
+            document.getElementById('serviceType').addEventListener('change', function() {
+                const otherServiceGroup = document.getElementById('otherServiceGroup');
+                if (this.value === 'other') {
+                    otherServiceGroup.classList.add('visible');
+                } else {
+                    otherServiceGroup.classList.remove('visible');
+                }
+            });
+
             // Обработка формы
             document.getElementById('requestForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 alert('Спасибо за вашу заявку! Наш менеджер свяжется с вами в ближайшее время.');
                 closeModal();
                 this.reset();
+                // Скрываем поле "Другое" после отправки формы
+                document.getElementById('otherServiceGroup').classList.remove('visible');
             });
             
             // Маска для телефона
