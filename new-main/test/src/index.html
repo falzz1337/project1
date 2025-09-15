@@ -570,5 +570,43 @@
             checkScroll();
         });
     </script>
+    <script>
+document.getElementById('requestForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Собираем данные формы
+    const formData = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        phone: document.getElementById('phone').value,
+        serviceType: document.getElementById('serviceType').value,
+        otherService: document.getElementById('otherService').value || null
+    };
+    
+    // Отправляем данные в Python (через AJAX к локальному серверу)
+    fetch('http://localhost:5000/submit-application', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Спасибо за вашу заявку! Наш менеджер свяжется с вами в ближайшее время.');
+            closeModal();
+            this.reset();
+            document.getElementById('otherServiceGroup').classList.remove('visible');
+        } else {
+            alert('Произошла ошибка при отправке формы. Пожалуйста, попробуйте еще раз.');
+        }
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+        alert('Произошла ошибка при отправке формы. Пожалуйста, попробуйте еще раз.');
+    });
+});
+</script>
 </body>
 </html>
